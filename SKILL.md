@@ -1,11 +1,19 @@
 ---
 name: html-diagram
-description: Use when 도식·다이어그램·인포그래픽·구조도·개념도·흐름도를 HTML로 만들 때, 사용자가 "편집 가능한 그림"(글자 수정, 박스 이동·복제, 화살표 조정)을 원할 때, 또는 그림·도식을 그려달라는 요청 전반. PPT 품질에 불만이 있거나 SVG 정적 이미지 대신 후보정 가능한 산출물이 필요한 경우 포함.
+description: 사람이 나중에 손으로 고칠 수 있는 HTML 도식·인포그래픽(글자 수정, 박스 이동·복제, 화살표 조정, 같은 파일 저장)을 만들 때 쓴다 — 사용자가 《편집 가능한 그림》·《후보정할 도식》·html-diagram을 말하거나 PPT·SVG 정적 그림 대신 고쳐 쓸 산출물을 원할 때. 그 밖의 아키텍처·흐름·시퀀스·데이터 흐름 같은 생성형 다이어그램은 archify, 구현 계획 한 장은 html-plan, 통계 차트는 dataviz가 맡는다.
 ---
 
 # html-diagram: 편집 가능한 HTML 도식
 
 **문서 자체가 에디터다.** 아래 규약대로 만들면 문서에 인라인된 엔진이 보기 모드(기본, 완전 정적)와 편집 모드(⌘E)를 제공한다: 도형 드래그·복제·복사/붙여넣기(다른 문서로도)·삭제·생성, 화살표 끝점·곡률·라벨 편집, 속성 패널, undo, 같은 파일 저장(⌘S)+히스토리+자동저장, 더블클릭 리치 서식 툴바, 편집기를 걷어낸 배포용 저장. 전체 기능은 `examples/poster-src.html` 한 장이 보여 준다.
+
+## 로컬 분기 (hw725 fork — 이 절만 상류와 다르다)
+
+- **발동 범위**: description을 《사람이 고칠 도식》으로 좁혔다. 생성형 다이어그램은 archify, 계획서는 html-plan, 통계 차트는 dataviz다(상류 description은 그림 요청 전반을 받아 archify와 겹쳤다).
+- **글꼴 정책(사용자 전역 규칙이 상류 지침보다 앞선다)**: 문서 스타일(첫 `<style>`)의 `@import`를 `https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-gov.min.css`로 바꾸고 `--font` 첫 항목을 `'Pretendard GOV Variable'`로 둔다(폴백은 그대로). 세리프는 `'Noto Serif KR'`(Google Fonts) 또는 나눔명조, 고정폭은 Sarasa Fixed K, 간체자 혼용 등 다국어는 Spoqa Han Sans Neo. 두 번째 `<style>`(엔진 UI 글꼴)은 엔진이라 고치지 않는다 — 배포본에는 남지 않는다.
+- **Windows(이 PC)**: 아래 `python3`은 `py -3`으로 부른다(`python3`는 Store 스텁이라 조용히 실패한다). 검증 브라우저는 Aside 대신 Claude in Chrome·내장 브라우저의 `javascript_tool`·`read_console_messages`를 쓴다.
+- **돌리지 않는 것**: `assets/tests/run.sh`(엔진 유지보수용 — bash·`aside` CLI·`rm -rf` 정리)와 `compare/`(상류의 모델 비교 자료)는 이 fork에서 쓰지 않는다. 엔진은 상류 그대로 두고 Sync fork로 받는다.
+- **따옴표**: 산출 문서 본문은 사용자 규칙대로 곧은 따옴표 대신 굽은 따옴표를 쓴다(상류의 줄표 금지 규칙과 함께 지킨다).
 
 ## 생성 워크플로
 
